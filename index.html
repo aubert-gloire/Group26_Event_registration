@@ -129,6 +129,14 @@
     } else {
         document.getElementById('emailError').textContent = "";
     }
+      // Date validation
+    const eventDate = document.getElementById('eventDate').value;
+    if (!eventDate) {
+        document.getElementById('dateError').textContent = "Please enter a valid event date.";
+        valid = false;
+    } else {
+        document.getElementById('dateError').textContent = "";
+    }
        </script>
 </body>
 </html>

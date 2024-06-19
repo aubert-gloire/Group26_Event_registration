@@ -120,6 +120,15 @@
     } else {
         document.getElementById('nameError').textContent = "";
     }
+      // Email validation
+    const email = document.getElementById('email').value;
+    const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+    if (!emailPattern.test(email)) {
+        document.getElementById('emailError').textContent = "Please enter a valid email address.";
+        valid = false;
+    } else {
+        document.getElementById('emailError').textContent = "";
+    }
        </script>
 </body>
 </html>

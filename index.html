@@ -108,6 +108,18 @@
   </form>
 </div>
      <script>
-         </script>
+        document.getElementById('registrationForm').addEventListener('submit', function(event) {
+    let valid = true;
+
+    // Name validation
+    const name = document.getElementById('name').value;
+    const namePattern = /^[A-Za-z\s]+$/;
+    if (!namePattern.test(name)) {
+        document.getElementById('nameError').textContent = "Please enter a valid name (letters and spaces only).";
+        valid = false;
+    } else {
+        document.getElementById('nameError').textContent = "";
+    }
+       </script>
 </body>
 </html>

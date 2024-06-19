@@ -80,12 +80,12 @@
   <form id="registrationForm">
     <div class="form-group">
       <label for="name">Name:</label>
-      <input type="text" id="name" name="name" required pattern="[A-Za-z\s]+" title="Letters and spaces only" placeholder="Enter your name">
+      <input type="text" id="name" name="name" required pattern="[A-Za-z\s]+" title="Letters and spaces only">
       <div class="error" id="nameError"></div>
   </div>
   <div class="form-group">
     <label for="email">Email:</label>
-    <input type="email" id="email" name="email" placeholder="Enter your email" required>
+    <input type="email" id="email" name="email" required>
     <div class="error" id="emailError"></div>
 </div>
 <div class="form-group">
@@ -107,76 +107,7 @@
     <input type="submit" value="Register">
   </form>
 </div>
-     <script>
-        document.getElementById('registrationForm').addEventListener('submit', function(event) {
-    let valid = true;
-
-    // Name validation
-    const name = document.getElementById('name').value;
-    const namePattern = /^[A-Za-z\s]+$/;
-    if (!namePattern.test(name)) {
-        document.getElementById('nameError').textContent = "Please enter a valid name (letters and spaces only).";
-        valid = false;
-    } else {
-        document.getElementById('nameError').textContent = "";
-    }
-      // Email validation
-    const email = document.getElementById('email').value;
-    const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-    if (!emailPattern.test(email)) {
-        document.getElementById('emailError').textContent = "Please enter a valid email address.";
-        valid = false;
-    } else {
-        document.getElementById('emailError').textContent = "";
-    }
-      // Date validation
-    const eventDate = document.getElementById('eventDate').value;
-    if (!eventDate) {
-        document.getElementById('dateError').textContent = "Please enter a valid event date.";
-        valid = false;
-    } else {
-        document.getElementById('dateError').textContent = "";
-    }
-          // Number of tickets validation
-    const tickets = document.getElementById('tickets').value;
-    if (tickets < 1 || tickets > 10) {
-        document.getElementById('ticketsError').textContent = "Please enter a number between 1 and 10.";
-        valid = false;
-    } else {
-        document.getElementById('ticketsError').textContent = "";
-    }
-
-    if (!valid) {
-        event.preventDefault();
-    }
-});
-          document.getElementById('phone').addEventListener('input', function(event) {
-    let input = event.target.value.replace(/\D/g, '').substring(0, 10); // Remove non-digits and limit to 10 digits
-    let formattedInput = '';
-
-    if (input.length > 0) {
-        formattedInput += '(';
-    }
-    if (input.length > 3) {
-        formattedInput += input.substring(0, 3) + ') ';
-        input = input.substring(3);
-    } else {
-        formattedInput += input;
-        input = '';
-    }
-    if (input.length > 3) {
-        formattedInput += input.substring(0, 3) + '-';
-        input = input.substring(3);
-    } else {
-        formattedInput += input;
-        input = '';
-    }
-    formattedInput += input;
-
-    event.target.value = formattedInput;
 
 
-});
-       </script>
 </body>
 </html>

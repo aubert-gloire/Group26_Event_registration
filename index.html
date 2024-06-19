@@ -149,6 +149,32 @@
     if (!valid) {
         event.preventDefault();
     }
+          document.getElementById('phone').addEventListener('input', function(event) {
+    let input = event.target.value.replace(/\D/g, '').substring(0, 10); // Remove non-digits and limit to 10 digits
+    let formattedInput = '';
+
+    if (input.length > 0) {
+        formattedInput += '(';
+    }
+    if (input.length > 3) {
+        formattedInput += input.substring(0, 3) + ') ';
+        input = input.substring(3);
+    } else {
+        formattedInput += input;
+        input = '';
+    }
+    if (input.length > 3) {
+        formattedInput += input.substring(0, 3) + '-';
+        input = input.substring(3);
+    } else {
+        formattedInput += input;
+        input = '';
+    }
+    formattedInput += input;
+
+    event.target.value = formattedInput;
+});
+
 });
        </script>
 </body>

@@ -137,6 +137,19 @@
     } else {
         document.getElementById('dateError').textContent = "";
     }
+          // Number of tickets validation
+    const tickets = document.getElementById('tickets').value;
+    if (tickets < 1 || tickets > 10) {
+        document.getElementById('ticketsError').textContent = "Please enter a number between 1 and 10.";
+        valid = false;
+    } else {
+        document.getElementById('ticketsError').textContent = "";
+    }
+
+    if (!valid) {
+        event.preventDefault();
+    }
+});
        </script>
 </body>
 </html>

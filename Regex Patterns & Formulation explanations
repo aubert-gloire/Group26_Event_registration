@@ -1,0 +1,117 @@
+/*
+    This file explains the regex patterns used in the Nightwatchers Registration Form.
+*/
+
+// Regex pattern for validating names
+const namePattern = /^[A-Za-z\s]+$/;
+/*
+    Explanation of namePattern:
+    ^          : Asserts position at the start of the string.
+    [A-Za-z\s] : Character set that matches any uppercase letter (A-Z), lowercase letter (a-z), or whitespace (\s).
+    +          : Quantifier that matches one or more of the preceding token (in this case, any letter or whitespace).
+    $          : Asserts position at the end of the string.
+    In summary, this pattern ensures that the input consists of only letters and spaces, with at least one character.
+*/
+
+// Regex pattern for validating email addresses
+const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+/*
+    Explanation of emailPattern:
+    ^                   : Asserts position at the start of the string.
+    [a-zA-Z0-9._-]+     : Character set that matches any letter (upper or lowercase), digit, dot (.), underscore (_), or hyphen (-). The + quantifier ensures one or more characters.
+    @                   : Matches the "@" symbol.
+    [a-zA-Z0-9.-]+      : Character set that matches any letter (upper or lowercase), digit, dot (.), or hyphen (-). The + quantifier ensures one or more characters.
+    \.                  : Escaped dot (.) that matches a literal dot. The backslash (\) is used to escape special characters.
+    [a-zA-Z]{2,6}       : Character set that matches any letter (upper or lowercase) with a length between 2 and 6. This ensures a valid domain suffix (like .com, .org).
+    $                   : Asserts position at the end of the string.
+    In summary, this pattern validates common email formats.
+*/
+
+// Regex pattern for validating phone numbers
+const phonePattern = /^\(\d{3}\) \d{3}-\d{4}$/;
+/*
+    Explanation of phonePattern:
+    ^            : Asserts position at the start of the string.
+    \(           : Escaped parenthesis that matches a literal opening parenthesis.
+    \d{3}        : Matches exactly three digits.
+    \)           : Escaped parenthesis that matches a literal closing parenthesis.
+    \s           : Matches a whitespace character.
+    \d{3}        : Matches exactly three digits.
+    -            : Matches a literal hyphen.
+    \d{4}        : Matches exactly four digits.
+    $            : Asserts position at the end of the string.
+    In summary, this pattern ensures the phone number is in the format (123) 456-7890.
+*/
+
+// Function to validate the form fields using the regex patterns
+document.getElementById('registrationForm').addEventListener('submit', function(event) {
+    let valid = true;
+
+    // Validate name
+    const name = document.getElementById('name').value;
+    if (!namePattern.test(name)) {
+        document.getElementById('nameError').textContent = "Please enter a valid name (letters and spaces only).";
+        valid = false;
+    } else {
+        document.getElementById('nameError').textContent = "";
+    }
+
+    // Validate email
+    const email = document.getElementById('email').value;
+    if (!emailPattern.test(email)) {
+        document.getElementById('emailError').textContent = "Please enter a valid email address.";
+        valid = false;
+    } else {
+        document.getElementById('emailError').textContent = "";
+    }
+
+    // Validate phone number
+    const phone = document.getElementById('phone').value;
+    if (!phonePattern.test(phone)) {
+        document.getElementById('phoneError').textContent = "Please enter a valid phone number.";
+        valid = false;
+    } else {
+        document.getElementById('phoneError').textContent = "";
+    }
+
+    // Validate event date (ensuring a non-empty date is selected)
+    const eventDate = document.getElementById('eventDate').value;
+    if (!eventDate) {
+        document.getElementById('dateError').textContent = "Please enter a valid event date.";
+        valid = false;
+    } else {
+        document.getElementById('dateError').textContent = "";
+    }
+
+    // Validate number of tickets (ensuring it's between 1 and 10)
+    const tickets = document.getElementById('tickets').value;
+    if (tickets < 1 || tickets > 10) {
+        document.getElementById('ticketsError').textContent = "Please enter a number between 1 and 10.";
+        valid = false;
+    } else {
+        document.getElementById('ticketsError').textContent = "";
+    }
+
+    // Prevent form submission if any field is invalid
+    if (!valid) {
+        event.preventDefault();
+    }
+});
+
+// Format phone number input as (123) 456-7890
+document.getElementById('phone').addEventListener('input', function(event) {
+    let input = event.target.value.replace(/\D/g, '').substring(0, 10); // Remove non-digits and limit to 10 digits
+    let formattedInput = '';
+
+    if (input.length > 0) {
+        formattedInput += '(';
+    }
+    if (input.length > 3) {
+        formattedInput += input.substring(0, 3) + ') ';
+        input = input.substring(3);
+    } else {
+        formattedInput += input;
+        input = '';
+    }
+    if (input.length > 3) {
+        formattedInput += input.substring(0, 3)

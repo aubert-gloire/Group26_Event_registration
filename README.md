@@ -2,15 +2,6 @@
 
 Welcome to the Nightwatchers Registration Form repository! This project is a simple HTML form for registering participants for the Nightwatchers event, with client-side validation using JavaScript and regular expressions (regex).
 
- Table of Contents
-
-- [Description](description)
-- [Features](features)
-- [Technologies Used](technologies-used)
-- [Installation](installation)
-- [Usage](usage)
-- [Regex Patterns Explained](regex-patterns-explained)
-- [License](license)
 
  Description
 
